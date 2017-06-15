@@ -10,10 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>WebModule</module>
-        <module>LoginModule</module>
         <module>CommonModule</module>
-        <module>PictureModule</module>
-        <module>RichTextModule</module>
         <module>ReceiptModule</module>
     </modules>
         <build>

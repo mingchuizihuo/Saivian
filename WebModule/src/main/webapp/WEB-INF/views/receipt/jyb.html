@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>金元宝</title>
+</head>
+<body>
+<!--
+
+ private Date consumeDate;//消费时间
+    private String consumeNum;//消费流水号
+    private Double consumeMoney;//消费总金额
+    private List<Product> products;//产品列表
+    private String bankName;//发卡行
+    private String bankNum;//银行卡号
+    private String effectDate;//有效期
+    private Date swipeDate;//刷卡时间
+    private String swipeNum;//刷卡流水号
+
+-->
+<div class="page80">
+    <div class="title">欢迎光临金元宝商厦</div>
+    <div class="head">
+        <table>
+            <tr>
+                <td>
+                    <span>交易号：211828</span>
+                </td>
+                <td>
+                    <span>小票号：1</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>收银台：162</span>
+                    <span>收银员：00082</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <span>日期：${consumeDate?date('yyyy-MM-dd HH:mm:ss')}</span>
+                </td>
+            </tr>
+
+        </table>
+        <hr />
+        <div>
+            <span>营业员：60104 部门：0102300206</span>
+        </div>
+        <table>
+            <th>
+                <td>单价</td>
+                <td>数量</td>
+                <td>折扣</td>
+                <td>金额</td>
+            </th>
+            <#list products as productOne>
+                <tr>
+                    <td rowspan="4">${productOne.productName}</td>
+                </tr>
+                <tr>
+                    <td>${productOne.productPrice}</td>
+                    <td>${productOne.productNum}</td>
+                    <td>${productOne.discount}</td>
+                    <td>${productOne.productPrice}</td>
+                </tr>
+            </#list>
+            <tr></tr>
+
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
          id="WebApp_ID" version="3.0">
     <!-- 首页 -->
     <welcome-file-list>
-        <welcome-file>saivian/index</welcome-file>
+        <welcome-file>/saivian/index</welcome-file>
     </welcome-file-list>
     <!-- Spring -->
     <!-- 配置Spring配置文件路径 -->
