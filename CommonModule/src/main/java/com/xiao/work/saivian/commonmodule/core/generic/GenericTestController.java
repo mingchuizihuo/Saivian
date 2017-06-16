@@ -27,7 +27,7 @@ public abstract class GenericTestController<Model,ModelExample> extends GenericC
 
 
         }catch (Exception e){
-            return ResultData.build().addErroe();
+            return ResultData.build().addError();
         }
         return ResultData.build();
 

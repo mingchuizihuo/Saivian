@@ -1,8 +1,8 @@
 package com.xiao.work.saivian.commonmodule.core.common;
 
 
-import com.github.pagehelper.Page;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.InvocationTargetException;
@@ -83,7 +83,7 @@ public class ResultData extends HashMap<String, Object> {
 	 * 添加失败
 	 * @return
 	 */
-	public ResultData addErroe(){
+	public ResultData addError(){
 
 		this.setStatus(Status.ADDERROR);
 		return this;
@@ -211,10 +211,10 @@ public class ResultData extends HashMap<String, Object> {
 	 * @return 实例本身
 	 */
 	@SuppressWarnings("rawtypes")
-	public ResultData parsePageBean(Page<?> page) {
+	public ResultData parsePageBean(MyPage<Model> page) {
 		super.put("sEcho", "");
 		super.put("iTotalRecords", page.getTotal());
-		super.put("iTotalDisplayRecords", page.getPageSize());
+		super.put("iTotalDisplayRecords", page.getResultList().size());
 
 
 		//parseBean(page.getResult());
@@ -232,9 +232,9 @@ public class ResultData extends HashMap<String, Object> {
 	 * @return 实例本身
 	 */
 	@SuppressWarnings("rawtypes")
-	public ResultData parseList(List<?> list) {
-		if (list instanceof Page) {
-			return parsePageBean((Page<?>) list);
+	public ResultData parseList(List<Model> list) {
+		if (list instanceof MyPage) {
+			return parsePageBean((MyPage<Model>) list);
 		}
 		super.put("sEcho", "");
 		super.put("aaData", list == null ? new ArrayList() : list);

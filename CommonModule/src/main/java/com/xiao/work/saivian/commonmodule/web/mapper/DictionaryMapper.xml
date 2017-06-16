@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passion.cloud.commonmodule.web.dao.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.passion.cloud.commonmodule.web.domain.pojo.Dictionary" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="dictionary_name" property="dictionaryName" jdbcType="VARCHAR" />
+    <result column="dictionary_value" property="dictionaryValue" jdbcType="VARCHAR" />
+    <result column="dictionary_level" property="dictionaryLevel" jdbcType="TINYINT" />
+    <result column="tid" property="tid" jdbcType="BIGINT" />
+    <result column="tidpath" property="tidpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, dictionary_name, dictionary_value, dictionary_level, tid, tidpath
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.DictionaryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from p_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from p_dictionary
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from p_dictionary
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.DictionaryExample" >
+    delete from p_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.Dictionary" useGeneratedKeys="true" keyProperty="id" >
+    insert into p_dictionary (dictionary_name, dictionary_value, 
+      dictionary_level, tid, tidpath
+      )
+    values (#{dictionaryName,jdbcType=VARCHAR}, #{dictionaryValue,jdbcType=VARCHAR}, 
+      #{dictionaryLevel,jdbcType=TINYINT}, #{tid,jdbcType=BIGINT}, #{tidpath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.Dictionary" useGeneratedKeys="true" keyProperty="id" >
+    insert into p_dictionary
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionaryName != null" >
+        dictionary_name,
+      </if>
+      <if test="dictionaryValue != null" >
+        dictionary_value,
+      </if>
+      <if test="dictionaryLevel != null" >
+        dictionary_level,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="tidpath != null" >
+        tidpath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionaryName != null" >
+        #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryValue != null" >
+        #{dictionaryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryLevel != null" >
+        #{dictionaryLevel,jdbcType=TINYINT},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="tidpath != null" >
+        #{tidpath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.DictionaryExample" resultType="java.lang.Integer" >
+    select count(*) from p_dictionary
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update p_dictionary
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.dictionaryName != null" >
+        dictionary_name = #{record.dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictionaryValue != null" >
+        dictionary_value = #{record.dictionaryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictionaryLevel != null" >
+        dictionary_level = #{record.dictionaryLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.tid != null" >
+        tid = #{record.tid,jdbcType=BIGINT},
+      </if>
+      <if test="record.tidpath != null" >
+        tidpath = #{record.tidpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update p_dictionary
+    set id = #{record.id,jdbcType=BIGINT},
+      dictionary_name = #{record.dictionaryName,jdbcType=VARCHAR},
+      dictionary_value = #{record.dictionaryValue,jdbcType=VARCHAR},
+      dictionary_level = #{record.dictionaryLevel,jdbcType=TINYINT},
+      tid = #{record.tid,jdbcType=BIGINT},
+      tidpath = #{record.tidpath,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.Dictionary" >
+    update p_dictionary
+    <set >
+      <if test="dictionaryName != null" >
+        dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryValue != null" >
+        dictionary_value = #{dictionaryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryLevel != null" >
+        dictionary_level = #{dictionaryLevel,jdbcType=TINYINT},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="tidpath != null" >
+        tidpath = #{tidpath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passion.cloud.commonmodule.web.domain.pojo.Dictionary" >
+    update p_dictionary
+    set dictionary_name = #{dictionaryName,jdbcType=VARCHAR},
+      dictionary_value = #{dictionaryValue,jdbcType=VARCHAR},
+      dictionary_level = #{dictionaryLevel,jdbcType=TINYINT},
+      tid = #{tid,jdbcType=BIGINT},
+      tidpath = #{tidpath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
